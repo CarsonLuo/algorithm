@@ -1,5 +1,7 @@
 package exercise.arrays;
 
+import java.util.Arrays;
+
 /*
  编写一个函数来查找字符串数组中的最长公共前缀。
 
@@ -25,40 +27,36 @@ package exercise.arrays;
  👍 1363 👎 0
  */
 public class LeetCode14 {
-    public String longestCommonPrefix(String[] strs) {
-        String prefix = "";
-        if(strs.length < 2){
-            return prefix;
+    // 公开前缀: 有一个前缀, 数组里任何一个元素都是以这个前缀开始的;
+    public static String longestCommonPrefix(String[] strs) {
+        String r = "";
+        // 特殊情况处理
+        if(strs.length == 0){
+            return r;
         }
-        for (int i = 0; i < strs.length; i++) {
-            String str = strs[i];
-            if(i == 0){
-                prefix = str;
-            }
-            prefix = compare(str, prefix);
-            if(prefix.length() == 0){
-                return prefix;
+        if(strs.length == 1){
+            return strs[0];
+        }
+        // 取数组第一个作为公共前缀, 将strs从索引1开始遍历
+        r = strs[0];
+        for(int i = 1; i < strs.length; i++){
+            while (true){
+                if(strs[i].startsWith(r)){
+                    break;
+                }else {
+                    r = r.substring(0, r.length() - 1);
+                }
+                if(r.equals("")){
+                    return r;
+                }
             }
         }
-        return prefix;
-    }
-
-    private String compare(String str, String prefix){
-        int length = Math.min(str.length(), prefix.length());
-        for(int i = 0; i < length; i++){
-            if(str.charAt(i) != prefix.charAt(i)){
-                return prefix.substring(0, i);
-            }
-        }
-        return prefix;
+        return r;
     }
 
     public static void main(String[] args) {
-        LeetCode14 l = new LeetCode14();
-
         String[] a = {"flower","flow","flight"};
-        //String[] a = {"dog","racecar","car"};
-        String cp = l.longestCommonPrefix(a);
-        System.out.println(cp);
+        // String[] a = {"dog","racecar","car"};
+        System.out.println(longestCommonPrefix(a));
     }
 }

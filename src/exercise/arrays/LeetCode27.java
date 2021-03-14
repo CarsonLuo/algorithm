@@ -47,33 +47,32 @@ for (int i = 0; i < len; i++) {
  👍 738 👎 0
  */
 public class LeetCode27 {
-    private int removeElement(int[] nums, int val) {
-        for (int i = 0; i < nums.length - 1; i++) {
-            if(nums[i] == val) {
-                for (int y = i + 1; y < nums.length; y++) {
-                    if(nums[y] != val){
-                        int a = nums[y];
-                        nums[y] = nums[i];
-                        nums[i] = a;
-                        break;
-                    }
-                }
+    private static int removeElement(int[] nums, int val) {
+        int i = 0;
+        int y = nums.length - 1;
+        while (i <= y){
+            if(nums[y] == val){
+                y--;
+                continue;
             }
-        }
-        for (int i = 0; i < nums.length; i++) {
             if(nums[i] == val){
-                return i;
+                swap(nums, i, y);
             }
+            i++;
         }
-        return nums.length;
+        return y + 1;
+    }
+
+    private static void swap(int[] arr, int i, int y){
+        int tmp = arr[i];
+        arr[i] = arr[y];
+        arr[y] = tmp;
     }
 
     public static void main(String[] args) {
-        LeetCode27 leetCode27 = new LeetCode27();
-
-        //int[] array = {3,2,2,3};
+        // int[] array = {3,2,2,3};
         int[] array = {0,1,2,2,3,0,4,2};
-        int length = leetCode27.removeElement(array, 2);
+        int length = removeElement(array, 2);
         System.out.println("new length : " + length);
         System.out.println("new array : " + Arrays.toString(array));
     }

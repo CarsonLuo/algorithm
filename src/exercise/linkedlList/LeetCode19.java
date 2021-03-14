@@ -27,30 +27,7 @@ package exercise.linkedlList;
 
 public class LeetCode19 {
     private ListNode removeNthFromEnd(ListNode head, int n) {
-        int length = 0;
-        ListNode var = head;
-        while (true){
-            if(var != null){
-                length++;
-                var = var.next;
-            }else {
-                break;
-            }
-        }
-        ListNode node = null;
-        for(int i = 1; i <= length - n; i++){
-            if(node == null){
-                node = head;
-            }
-            node = node.next;
-        }
-        if(node == null){
-            return head.next;
-        }
-        if(node.next != null) {
-            node.next = node.next.next;
-        }
-        return head;
+       return null;
     }
 
     public static void main(String[] args) {
