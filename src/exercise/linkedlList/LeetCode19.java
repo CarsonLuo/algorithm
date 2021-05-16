@@ -26,17 +26,27 @@ package exercise.linkedlList;
 // 👍 1222 👎 0
 
 public class LeetCode19 {
-    private ListNode removeNthFromEnd(ListNode head, int n) {
-       return null;
+    private static ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0, head);
+        ListNode first = head;
+        ListNode second = dummy;
+        for (int i = 0; i < n; ++i) {
+            first = first.next;
+        }
+        while (first != null) {
+            first = first.next;
+            second = second.next;
+        }
+        second.next = second.next.next;
+        return  dummy.next;
     }
 
     public static void main(String[] args) {
-        ListNode n4 = new ListNode(4);
-        ListNode n3 = new ListNode(3,n4);
-        ListNode n2 = new ListNode(2,n3);
-        ListNode n1 = new ListNode(1,n2);
-        LeetCode19 leetCode19 = new LeetCode19();
-        n1 = leetCode19.removeNthFromEnd(n1,3);
-        System.out.println(n1.toString());
+        ListNode n5 = new ListNode(5);
+        ListNode n4 = new ListNode(4, n5);
+        ListNode n3 = new ListNode(3, n4);
+        ListNode n2 = new ListNode(2, n3);
+        ListNode n1 = new ListNode(1, n2);
+        System.out.println(removeNthFromEnd(n1,2));
     }
 }
